@@ -1,21 +1,47 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import Variable from "./Variable";
+import "./App.css";
 
 class App extends Component {
+  state = {
+    numPeople: 1,
+    years: 1,
+    qualityImprovement: 0.1
+  };
+
+  onChange = (variable, newVal) => {
+    this.setState(state => ({ ...state, [variable]: newVal }));
+  };
+
   render() {
+    const variables = Object.keys(this.state).map(varName => (
+      <Variable
+        key={varName}
+        onChange={this.onChange}
+        name={varName}
+        value={this.state[varName]}
+      />
+    ));
+
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Effective Altruism Calculator</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div className="Calculator">
+          {variables}
+          <div>
+            Result: {calc(this.state)}
+          </div>
+        </div>
       </div>
     );
   }
 }
 
 export default App;
+
+function calc({ numPeople, years, qualityImprovement }) {
+  const QALY = numPeople * years * qualityImprovement;
+  return QALY;
+}
