@@ -7,7 +7,6 @@
             "name": "Chrome",
             "url": "http://localhost:3000",
             "webRoot": "${workspaceRoot}",
-            "userDataDir": "${workspaceRoot}/.vscode/chrome",
             "showAsyncStacks": true,
             "smartStep": true
         }
