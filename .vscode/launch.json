@@ -4,9 +4,12 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Launch Chrome against localhost",
+            "name": "Chrome",
             "url": "http://localhost:3000",
-            "webRoot": "${workspaceRoot}"
+            "webRoot": "${workspaceRoot}",
+            "userDataDir": "${workspaceRoot}/.vscode/chrome",
+            "showAsyncStacks": true,
+            "smartStep": true
         }
     ]
 }
