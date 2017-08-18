@@ -1,4 +1,14 @@
 .Variable {
-  padding: 10px 0;
+  padding: 20px 0;
   color: #444;
+  width: 4em;
+}
+
+.Variable input{
+  margin: 0 40px;
+}
+
+.Variable input[type='range']{
+  width: 41em;
+  margin: 0 40px;
 }
