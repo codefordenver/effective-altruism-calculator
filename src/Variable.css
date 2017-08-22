@@ -1,7 +1,7 @@
 .Variable {
   padding: 20px 0;
   color: #444;
-  width: 4em;
+  width: 600px;
 }
 
 .Variable input{
@@ -9,6 +9,6 @@
 }
 
 .Variable input[type='range']{
-  width: 41em;
+  width: 545px;
   margin: 0 40px;
 }
