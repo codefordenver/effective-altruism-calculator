@@ -3,14 +3,14 @@ import { LineChart } from 'react-d3';
 
 import "./Variable.css";
 
-const Variable = ({ value, onChange, name }) => (
+const Variable = ({ value, onChange, name, result }) => (
   <div className="Variable">
     <label>
       {name}:
       <br />
       <LineChart
         legend={false}
-        data={calculateSeries(value)}
+        data={calculateSeries(value, result)}
         width={600}
         height={200}
       />
@@ -32,7 +32,7 @@ const Variable = ({ value, onChange, name }) => (
   </div>
 );
 
-let calculateSeries = (value) => {
+let calculateSeries = (value, result) => {
   var lineData = [
     {
       name: 'series1',
@@ -40,7 +40,7 @@ let calculateSeries = (value) => {
     }
   ]
   for(var i =1; i<=30; i++) {
-    lineData[0].values.push({x: i, y: i/value});
+    lineData[0].values.push({x: i, y: (i/value) * result});
   }
 
   return lineData;
