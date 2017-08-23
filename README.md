@@ -1,3 +1,11 @@
+# Effective Altruism Calculator
+
+The idea of this project is to have to have a user-friendly calculator for quickly evaluating and comparing different activities in regard to their positive impact. We are getting inspiration from [this fantastic calculator for evaluating whether to rent or buy](https://www.nytimes.com/interactive/2014/upshot/buy-rent-calculator.html)
+
+For more context as to what this is and why it exists, please see the [initial project idea post](https://github.com/codefordenver/projects/issues/73).
+
+___
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
