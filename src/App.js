@@ -14,12 +14,16 @@ class App extends Component {
   };
 
   render() {
+
+    let result = calc(this.state);
+
     const variables = Object.keys(this.state).map(varName => (
       <Variable
         key={varName}
         onChange={this.onChange}
         name={varName}
         value={this.state[varName]}
+        result={result}
       />
     ));
 
@@ -31,7 +35,7 @@ class App extends Component {
         <div className="Calculator">
           {variables}
           <div>
-            Result: {calc(this.state)}
+            Result: {result}
           </div>
         </div>
       </div>
