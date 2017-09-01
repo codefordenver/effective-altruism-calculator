@@ -10,11 +10,26 @@ function getVarValues(state) {
 }
 
 const initialState = {
-  numPeople: { value: 100, min: 0, max: 10000, displayName: 'Number of people' },
-  years: { value: 5, min: 0, max: 100, displayName: 'Number of years' },
-  qualityImprovement: { value: 0.1, min: 0, max: 1, displayName: 'Average quality of life improvement over that time' },
-  cost: { value: 10, min: 1, max: 100, displayName: 'Cost (1000 USD)' },
-  chanceOfSuccess: { value: 0.1, min: 0, max: 1, displayName: 'Chance of Success'},
+  numPeople: {
+    value: 100,
+    min: 0,
+    max: 10000,
+    displayName: "Number of people"
+  },
+  years: { value: 5, min: 0, max: 100, displayName: "Number of years" },
+  qualityImprovement: {
+    value: 0.1,
+    min: 0,
+    max: 1,
+    displayName: "Average quality of life improvement over that time"
+  },
+  cost: { value: 10, min: 1, max: 100, displayName: "Cost (1000 USD)" },
+  chanceOfSuccess: {
+    value: 0.1,
+    min: 0,
+    max: 1,
+    displayName: "Chance of Success"
+  }
 };
 
 function calc({ numPeople, years, qualityImprovement, cost, chanceOfSuccess }) {
@@ -27,7 +42,8 @@ class App extends Component {
 
   onChange = (variable, newVal) => {
     this.setState(state => ({
-      ...state, [variable]: {
+      ...state,
+      [variable]: {
         ...state[variable],
         value: newVal
       }
@@ -35,7 +51,6 @@ class App extends Component {
   };
 
   render() {
-
     const varValues = getVarValues(this.state);
     const result = calc(varValues).toFixed(2);
 
