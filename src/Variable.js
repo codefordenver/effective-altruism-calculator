@@ -1,46 +1,59 @@
 import React from "react";
 import { LineChart } from 'react-d3';
-
 import "./Variable.css";
 
-const Variable = ({ value, onChange, name, result }) => (
-  <div className="Variable">
-    <label>
-      {name}:
-      <br />
-      <LineChart
-        legend={false}
-        data={calculateSeries(value, result)}
-        width={600}
-        height={200}
-      />
-      <input
-        type="range"
-        value={value}
-        min={1}
-        max={30}
-        onChange={e => onChange(name, e.target.value)}
-      />
-      <input
-        type="number"
-        value={value}
-        min={1}
-        max={30}
-        onChange={e => onChange(name, e.target.value)}
-      />
-    </label>
-  </div>
-);
+const graphSteps = 60;
 
-let calculateSeries = (value, result) => {
+const Variable = ({ displayName, values, onChange, name, fn, min, max }) => {
+  const value = values[name];
+  const graphStepSize = (max - min) / graphSteps;
+  const chartData = calculateSeries({ values, graphStepSize, name, fn, min, max });
+
+  return (
+    <div className="Variable">
+      <label>
+        {displayName}:
+        <br />
+        <LineChart
+          legend={false}
+          data={chartData}
+          width={600}
+          height={200}
+        />
+        <input
+          type="range"
+          value={value}
+          min={min}
+          max={max}
+          step="any"
+          onChange={e => onChange(name, e.target.value)}
+        />
+        <input
+          type="number"
+          value={value}
+          min={min}
+          max={max}
+          step={graphStepSize}
+          onChange={e => onChange(name, e.target.value)}
+        />
+      </label>
+    </div>
+  );
+};
+
+function calculateSeries({ name, graphStepSize, values, fn, min, max }) {
   var lineData = [
     {
       name: 'series1',
       values: []
     }
-  ]
-  for(var i =1; i<=30; i++) {
-    lineData[0].values.push({x: i, y: (i/value) * result});
+  ];
+
+  for (var i = 0; i <= graphSteps; i++) {
+    const x = min + i * graphStepSize;
+    const varData = { ...values, [name]: x };
+    const y = fn(varData);
+    lineData[0].values.push({ x, y });
   }
 
   return lineData;

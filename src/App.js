@@ -2,30 +2,56 @@ import React, { Component } from "react";
 import Variable from "./Variable";
 import "./App.css";
 
+function getVarValues(state) {
+  return Object.keys(state).reduce((values, varName) => {
+    values[varName] = state[varName].value;
+    return values;
+  }, {});
+}
+
+const initialState = {
+  numPeople: { value: 100, min: 0, max: 10000, displayName: 'Number of people' },
+  years: { value: 5, min: 0, max: 100, displayName: 'Number of years' },
+  qualityImprovement: { value: 0.1, min: 0, max: 1, displayName: 'Average quality of life improvement over that time' },
+  cost: { value: 10, min: 1, max: 100, displayName: 'Cost (1000 USD)' },
+  chanceOfSuccess: { value: 0.1, min: 0, max: 1, displayName: 'Chance of Success'},
+};
+
+function calc({ numPeople, years, qualityImprovement, cost, chanceOfSuccess }) {
+  const QALY = numPeople * years * qualityImprovement / cost * chanceOfSuccess;
+  return QALY;
+}
+
 class App extends Component {
-  state = {
-    numPeople: 1,
-    years: 1,
-    qualityImprovement: 0.1
-  };
+  state = initialState;
 
   onChange = (variable, newVal) => {
-    this.setState(state => ({ ...state, [variable]: newVal }));
+    this.setState(state => ({
+      ...state, [variable]: {
+        ...state[variable],
+        value: newVal
+      }
+    }));
   };
 
   render() {
 
-    let result = calc(this.state);
+    const varValues = getVarValues(this.state);
+    const result = calc(varValues);
 
-    const variables = Object.keys(this.state).map(varName => (
-      <Variable
-        key={varName}
-        onChange={this.onChange}
-        name={varName}
-        value={this.state[varName]}
-        result={result}
-      />
-    ));
+    const variables = Object.keys(this.state).map(varName => {
+      const varData = this.state[varName];
+      return (
+        <Variable
+          key={varName}
+          onChange={this.onChange}
+          name={varName}
+          values={varValues}
+          fn={calc}
+          {...varData}
+        />
+      );
+    });
 
     return (
       <div className="App">
@@ -35,7 +61,7 @@ class App extends Component {
         <div className="Calculator">
           {variables}
           <div>
-            Result: {result}
+            Expected Value: {result} QALYs / 1000 USD
           </div>
         </div>
       </div>
@@ -44,8 +70,3 @@ class App extends Component {
 }
 
 export default App;
-
-function calc({ numPeople, years, qualityImprovement }) {
-  const QALY = numPeople * years * qualityImprovement;
-  return QALY;
-}
