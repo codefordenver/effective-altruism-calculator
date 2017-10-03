@@ -1,3 +1,5 @@
+[![Waffle.io - Issues in progress](https://badge.waffle.io/codefordenver/effective-altruism-calculator.svg?label=in%20progress&title=In%20Progress)](http://waffle.io/codefordenver/effective-altruism-calculator)
+
 # Effective Altruism Calculator
 
 The idea of this project is to have to have a user-friendly calculator for quickly evaluating and comparing different activities in regard to their positive impact. We are getting inspiration from [this fantastic calculator for evaluating whether to rent or buy](https://www.nytimes.com/interactive/2014/upshot/buy-rent-calculator.html)
