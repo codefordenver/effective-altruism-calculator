@@ -12,3 +12,11 @@
   width: 545px;
   margin: 0 40px;
 }
+
+.DescriptionTitle{
+	font-size: 150%;
+}
+
+.Description{
+	font-size: 100%;
+}

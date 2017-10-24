@@ -13,6 +13,12 @@ class App extends Component {
     this.setState(state => ({ ...state, [variable]: newVal }));
   };
 
+  description = {
+    numPeople: "This is the number of people",
+    years: "This is the years",
+    qualityImprovement: "This is quality improveemnt"
+  };
+
   render() {
 
     let result = calc(this.state);
@@ -24,6 +30,8 @@ class App extends Component {
         name={varName}
         value={this.state[varName]}
         result={result}
+        description= {this.description[varName]}
+        
       />
     ));
 

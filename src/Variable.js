@@ -1,10 +1,20 @@
 import React from "react";
 import { LineChart } from 'react-d3';
+import d3 from 'd3'
 
 import "./Variable.css";
 
-const Variable = ({ value, onChange, name, result }) => (
+const Variable = ({ value, onChange, name, result,description }) => (
   <div className="Variable">
+    <label className="DescriptionTitle">
+      Description:
+    </label>
+    <br />
+    <label className="Description">
+      {description} 
+    </label>
+    <br />
+    <br />
     <label>
       {name}:
       <br />
@@ -13,6 +23,9 @@ const Variable = ({ value, onChange, name, result }) => (
         data={calculateSeries(value, result)}
         width={600}
         height={200}
+        circleRadius = {5}
+
+        colors = {d3.scale.category20c()}
       />
       <input
         type="range"
