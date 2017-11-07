@@ -37,7 +37,7 @@ class App extends Component {
   render() {
 
     const varValues = getVarValues(this.state);
-    const result = calc(varValues);
+    const result = calc(varValues).toFixed(2);
 
     const variables = Object.keys(this.state).map(varName => {
       const varData = this.state[varName];
@@ -60,9 +60,9 @@ class App extends Component {
         </div>
         <div className="Calculator">
           {variables}
-          <div>
-            Expected Value: {result} QALYs / 1000 USD
-          </div>
+        </div>
+        <div className="calculatorResult">
+          Expected Value: {result} QALYs / 1000 USD
         </div>
       </div>
     );

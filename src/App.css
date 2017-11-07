@@ -1,9 +1,51 @@
+
+.App {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+/* We tell all items to be 100% width, via flex-basis */
+.App > * {
+  flex: 1 100%;
+}
+
 .App-header {
+  width: 100%;
   background-color: lightblue;
   padding: 20px;
   color: white;
 }
 
 .Calculator {
-  padding: 20px;
+	height: 75vh;
+	overflow: auto;
+	margin: auto;
+}
+
+.calculatorResult {
+	background-color: lightblue;
+  margin: auto;
+  padding: 15px;
+  color: white;
+}
+
+/* We rely on source order for mobile-first approach
+ * in this case:
+ * 1. App-header
+ * 2. Calculator
+ * 3. calculatorResult
+ */
+
+/* Large screens */
+@media all and (min-width: 800px) {
+  .Calculator { 
+  	flex: 1 0px; 
+  	height: 100vh;
+  	overflow: auto;
+  	margin-left: 10px;
+  }
+  .calculatorResult { 
+  	order: 2; 
+  	padding: 20px;
+  }
 }
