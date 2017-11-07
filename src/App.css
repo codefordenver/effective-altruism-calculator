@@ -24,9 +24,9 @@
 
 .calculatorResult {
 	background-color: lightblue;
-    margin: auto;
-    padding: 15px;
-    color: white;
+  margin: auto;
+  padding: 15px;
+  color: white;
 }
 
 /* We rely on source order for mobile-first approach
