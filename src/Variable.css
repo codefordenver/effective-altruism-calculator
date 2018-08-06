@@ -2,13 +2,17 @@
   padding: 20px 0;
   color: #444;
   width: 600px;
+  margin: auto;
 }
 
 .Variable input{
-  margin: 0 40px;
+  /* margin: 0 40px; */
+  margin-left: 37px;
 }
 
 .Variable input[type='range']{
-  width: 545px;
-  margin: 0 40px;
+  /* width: 600px; */
+  /* margin: 0 40px; */
+  margin-left: 37px;
+  width: 563px;
 }

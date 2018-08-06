@@ -1,19 +1,24 @@
 import React from "react";
-import { LineChart } from "react-d3";
+import {XYPlot, XAxis, YAxis, HorizontalGridLines, LineSeries, MarkSeries} from 'react-vis';
 import "./Variable.css";
 
-const graphSteps = 60;
+const graphSteps = 50;
+const stepsRange = range(graphSteps);
+
+function range(n) {
+  return [...new Array(n).keys()];
+}
 
 const Variable = ({ displayName, values, onChange, name, fn, min, max }) => {
   const value = values[name];
+  const y = fn({ ...values, [name]: value });
   const graphStepSize = (max - min) / graphSteps;
+  const xValues = stepsRange.map(i => min + i * graphStepSize);
   const chartData = calculateSeries({
     values,
-    graphStepSize,
     name,
     fn,
-    min,
-    max
+    xValues
   });
 
   return (
@@ -21,14 +26,22 @@ const Variable = ({ displayName, values, onChange, name, fn, min, max }) => {
       <label>
         {displayName}:
         <br />
-        <LineChart legend={false} data={chartData} width={600} height={200} />
+        <XYPlot
+          width={600}
+          height={200}>
+          <HorizontalGridLines />
+          <XAxis />
+          <YAxis />
+          <LineSeries data={chartData} style={{ fill: 'none' }}/>
+          <MarkSeries data={[{ x: value, y }]} />
+        </XYPlot>
         <input
           type="range"
           value={value}
           min={min}
           max={max}
           step="any"
-          onChange={e => onChange(name, e.target.value)}
+          onChange={e => onChange(name, parseFloat(e.target.value))}
         />
         <input
           type="number"
@@ -36,29 +49,19 @@ const Variable = ({ displayName, values, onChange, name, fn, min, max }) => {
           min={min}
           max={max}
           step={graphStepSize}
-          onChange={e => onChange(name, e.target.value)}
+          onChange={e => onChange(name, parseFloat(e.target.value))}
         />
       </label>
     </div>
   );
 };
 
-function calculateSeries({ name, graphStepSize, values, fn, min, max }) {
-  var lineData = [
-    {
-      name: "series1",
-      values: []
-    }
-  ];
-
-  for (var i = 0; i <= graphSteps; i++) {
-    const x = min + i * graphStepSize;
-    const varData = { ...values, [name]: x };
-    const y = fn(varData);
-    lineData[0].values.push({ x, y });
-  }
-
-  return lineData;
+function calculateSeries({ name, values, fn, xValues }) {
+  const fnInput = { ...values };
+  return xValues.map(x => {
+    fnInput[name] = x;
+    return { x, y: fn(fnInput) };
+  });
 }
 
 export default Variable;
