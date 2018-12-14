@@ -1,5 +1,5 @@
 import React from "react";
-import { LineChart } from 'react-d3';
+import { LineChart } from "react-d3";
 import "./Variable.css";
 
 const graphSteps = 60;
@@ -7,19 +7,21 @@ const graphSteps = 60;
 const Variable = ({ displayName, values, onChange, name, fn, min, max }) => {
   const value = values[name];
   const graphStepSize = (max - min) / graphSteps;
-  const chartData = calculateSeries({ values, graphStepSize, name, fn, min, max });
+  const chartData = calculateSeries({
+    values,
+    graphStepSize,
+    name,
+    fn,
+    min,
+    max
+  });
 
   return (
     <div className="Variable">
       <label>
         {displayName}:
         <br />
-        <LineChart
-          legend={false}
-          data={chartData}
-          width={600}
-          height={200}
-        />
+        <LineChart legend={false} data={chartData} width={600} height={200} />
         <input
           type="range"
           value={value}
@@ -44,7 +46,7 @@ const Variable = ({ displayName, values, onChange, name, fn, min, max }) => {
 function calculateSeries({ name, graphStepSize, values, fn, min, max }) {
   var lineData = [
     {
-      name: 'series1',
+      name: "series1",
       values: []
     }
   ];

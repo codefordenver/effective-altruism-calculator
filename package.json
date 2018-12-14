@@ -2,13 +2,6 @@
   "name": "temp",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "gh-pages": "^1.2.0",
-    "react": "^16.4.2",
-    "react-d3": "^0.4.0",
-    "react-dom": "^16.4.2",
-    "react-scripts": "^1.1.4"
-  },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
@@ -17,5 +10,23 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "homepage": "https://codefordenver.github.io/effective-altruism-calculator"
+  "dependencies": {
+    "gh-pages": "^1.2.0",
+    "react": "^16.4.2",
+    "react-d3": "^0.4.0",
+    "react-dom": "^16.4.2",
+    "react-scripts": "^1.1.4"
+  },
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.4",
+    "prettier": "^1.14.0"
+  },
+  "homepage": "https://codefordenver.github.io/effective-altruism-calculator",
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  }
 }
