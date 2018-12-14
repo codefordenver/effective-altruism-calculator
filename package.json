@@ -1,5 +1,5 @@
 {
-  "name": "temp",
+  "name": "effective-altruism-calculator",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -13,9 +13,9 @@
   "dependencies": {
     "gh-pages": "^1.2.0",
     "react": "^16.4.2",
-    "react-d3": "^0.4.0",
     "react-dom": "^16.4.2",
-    "react-scripts": "^1.1.4"
+    "react-scripts": "^1.1.4",
+    "react-vis": "^1.10.4"
   },
   "devDependencies": {
     "husky": "^0.14.3",

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Variable from "./Variable";
+import { initialState, calc, modelName, ModelResult } from './model';
 import "./App.css";
 
 function getVarValues(state) {
@@ -7,34 +8,6 @@ function getVarValues(state) {
     values[varName] = state[varName].value;
     return values;
   }, {});
-}
-
-const initialState = {
-  numPeople: {
-    value: 100,
-    min: 0,
-    max: 10000,
-    displayName: "Number of people"
-  },
-  years: { value: 5, min: 0, max: 100, displayName: "Number of years" },
-  qualityImprovement: {
-    value: 0.1,
-    min: 0,
-    max: 1,
-    displayName: "Average quality of life improvement over that time"
-  },
-  cost: { value: 10, min: 1, max: 100, displayName: "Cost (1000 USD)" },
-  chanceOfSuccess: {
-    value: 0.1,
-    min: 0,
-    max: 1,
-    displayName: "Chance of Success"
-  }
-};
-
-function calc({ numPeople, years, qualityImprovement, cost, chanceOfSuccess }) {
-  const QALY = numPeople * years * qualityImprovement / cost * chanceOfSuccess;
-  return QALY;
 }
 
 class App extends Component {
@@ -70,14 +43,14 @@ class App extends Component {
 
     return (
       <div className="App">
-        <div className="App-header">
-          <h2>Effective Altruism Calculator</h2>
+        <div className="App-header colored-background-1">
+          <h2>{modelName}</h2>
         </div>
         <div className="Calculator">
           {variables}
         </div>
-        <div className="calculatorResult">
-          Expected Value: {result} QALYs / 1000 USD
+        <div className="calculatorResult colored-background-1">
+          <ModelResult result={result} />
         </div>
       </div>
     );
